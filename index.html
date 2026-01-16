@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Excellent Paper Impex</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue:#2356b8;
+      --muted:#6b7280;
+      --card:#f3f6f9;
+      --bg:#f6f8fb;
+      --dark:#111827;
+      --radius:14px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased}
+    html{scroll-behavior:smooth}
+    .container{max-width:1150px;margin:0 auto;padding:32px}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(246,248,251,0.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(17,24,39,0.06)}
+    .site-header nav a{padding:10px 0}
+    .brand{font-weight:800;font-size:20px}
+    .tag{display:block;font-size:13px;color:var(--muted);font-weight:500}
+    nav a{margin-left:28px;color:var(--muted);text-decoration:none;font-weight:600}
+
+    /* Hero */
+    .hero{background:linear-gradient(180deg,#eef3f9 0%, #f7f9fb 100%);padding:64px 0;border-radius:8px}
+    .hero-inner{text-align:center;padding:10px 20px}
+    .hero h1{font-size:58px;line-height:1.02;margin:0 0 18px;font-weight:800}
+    .hero h1 .accent{color:var(--blue)}
+    .hero p{max-width:900px;margin:0 auto;color:var(--muted);font-size:20px}
+
+    /* features */
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;margin-top:48px}
+    .feature{background:transparent;text-align:center;padding:18px}
+    .feature .icon{width:68px;height:68px;border-radius:12px;background:#eaf0fb;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .feature h3{margin:0;font-size:20px}
+    .feature p{color:var(--muted);margin-top:8px}
+
+    .center-cta{text-align:center;margin:48px 0}
+    .btn{background:var(--blue);color:white;padding:14px 34px;border-radius:12px;display:inline-block;font-weight:700;text-decoration:none}
+
+    /* Products list */
+    .products{padding:48px 0}
+    .who{padding:28px 0}
+    .who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .who-card{background:white;border-radius:14px;padding:22px;box-shadow:0 6px 20px rgba(13,27,54,0.05)}
+    .who-card h3{margin:8px 0 6px 0}
+    .who-card p{margin:0 0 12px 0;color:var(--muted)}
+    .who-card ul{margin:0;padding-left:18px;color:var(--muted)}
+    .who-icon{width:54px;height:54px;border-radius:12px;background:#eaf0fb;display:flex;align-items:center;justify-content:center;font-size:22px}
+    .products h2{text-align:center;font-size:44px;margin:0}
+    .products p.lead{text-align:center;color:var(--muted);margin-top:10px}
+    .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:28px}
+    .prod-item{background:white;padding:18px;border-radius:12px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 0 rgba(15,23,42,0.03)}
+    .bullet{width:12px;height:12px;background:var(--blue);border-radius:50%}
+
+    /* contact */
+    .contact{background:white;padding:28px;border-radius:14px;box-shadow:0 6px 20px rgba(13,27,54,0.05);margin:32px 0}
+    .contact h3{margin-top:0}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .input, textarea{width:100%;padding:14px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    textarea{min-height:120px;resize:vertical}
+    .consent{display:flex;align-items:center;gap:12px;color:var(--muted);margin:12px 0}
+
+    /* misc */
+    .sustain, .why{background:linear-gradient(180deg,#fff 0,#f5f8fb 100%);padding:26px;border-radius:12px;margin-bottom:22px}
+    .industries{padding:40px 0}
+    .industry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+    .industry{background:white;border-radius:12px;padding:18px;text-align:center;font-weight:700;box-shadow:0 2px 0 rgba(15,23,42,0.03)}
+    .footer{background:#0f1724;color:#cbd5e1;padding:40px;border-radius:8px;margin-top:36px}
+    .to-top{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:999px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:900;box-shadow:0 18px 40px rgba(35,86,184,0.25);opacity:0;transform:translateY(8px);pointer-events:none;transition:all .2s ease}
+    .to-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
+    .footer a{color:#d1d6df;text-decoration:none}
+
+    @media (max-width:900px){
+      .hero h1{font-size:34px}
+      .features{grid-template-columns:1fr}
+      .prod-grid{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
+      .who-grid{grid-template-columns:1fr}
+      .industry-grid{grid-template-columns:1fr}
+      nav{display:none}
+    }
+.form-grid{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="container">
+    <header class="site-header">
+      <div>
+        <div class="brand">Excellent Paper Impex</div>
+        <div class="tag">Global Paper Trading</div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#who">Who We Serve</a>
+        <a href="#products">Products</a>
+        <a href="#industries">Industries</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="about">
+      <div class="hero-inner">
+        <h1>Bridging Quality Paper Suppliers with <span class="accent">Global Businesses</span></h1>
+        <p>Excellent Paper Impex serves as your trusted global partner in the paper supply chain, supporting quality manufacturers with businesses seeking consistent, reliable supply solutions worldwide.</p>
+
+        <div class="features" aria-hidden="false">
+          <div class="feature">
+            <div class="icon">✔️</div>
+            <h3>Reliable Sourcing</h3>
+            <p>Consistent quality and timely delivery from trusted global suppliers</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🚚</div>
+            <h3>Transportation Support</h3>
+            <p>Coordinated dispatch planning and documentation support</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🤝</div>
+            <h3>Customer-First Approach</h3>
+            <p>Your business needs drive our sourcing and service decisions</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🌐</div>
+            <h3>Global Connectivity</h3>
+            <p>India-based with worldwide supplier and buyer networks</p>
+          </div>
+        </div>
+
+        
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 style="text-align:center;font-size:38px;margin:40px 0 10px 0">Who We <span style="color:var(--blue)">Serve</span></h2>
+      <p style="text-align:center;color:var(--muted);margin:0 0 22px 0">We support businesses across the printing, packaging and paper supply chain through verified sourcing and transparent trading.</p>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <div class="who-icon">🏭</div>
+          <h3>Paper Mills & Manufacturers</h3>
+          <p>Partnering with verified mills to ensure consistent supply and dependable fulfilment.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">🖨️</div>
+          <h3>Printers & Converters</h3>
+          <p>Supplying quality paper grades for commercial printing and converting requirements.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">📦</div>
+          <h3>Packaging Companies</h3>
+          <p>Supporting packaging businesses with reliable sourcing and quality consistency.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">📈</div>
+          <h3>Traders / Stockists</h3>
+          <p>Connecting stock holders and buyers through transparent pricing and timely movement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="products">
+      <h2>Our <span style="color:var(--blue)">Product Range</span></h2>
+      <p class="lead">We specialize in sourcing premium paper products across multiple categories.</p>
+
+      <div class="prod-grid">
+                <div class="prod-item"><div class="bullet"></div><strong>Writing & Printing Papers</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>Packaging Papers</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>Specialty Papers</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>Recovered Paper</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>Stock Lot</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>Plastic Rolls</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>News Print</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>Labels</strong></div>
+        <div class="prod-item"><div class="bullet"></div><strong>Graphic Paper</strong></div>
+      </div>
+
+      <div style="text-align:center;margin-top:26px">
+        <p style="color:var(--muted)">Need a specific paper type not listed? We source custom solutions worldwide.</p>
+        <a class="btn" href="#contact">Contact Us</a>
+      </div>
+
+    </section>
+
+    <section id="industries" class="industries">
+      <h2 style="text-align:center;font-size:38px;margin:0">Industries We <span style="color:var(--blue)">Serve</span></h2>
+      <p style="text-align:center;color:var(--muted);margin-top:10px">We supply paper solutions for high-demand sectors that require quality consistency and reliable deliveries.</p>
+      <div class="industry-grid">
+        <div class="industry">Printing Houses</div>
+        <div class="industry">FMCG Packaging</div>
+        <div class="industry">Corrugation Plants</div>
+        <div class="industry">Industrial Packaging</div>
+      </div>
+    </section>
+
+    <section class="sustain">
+      <h3>Our Commitment to Sustainability</h3>
+      <blockquote style="margin:12px 0;padding-left:12px;border-left:6px solid var(--blue);color:var(--muted);font-style:italic">"Sustainable practices are not just good for business - they are essential for our planet's future. Every recycled paper product saves trees, reduces waste, and creates a cleaner environment for generations to come."</blockquote>
+      <p style="font-weight:600">We actively promote recycling practices and work with suppliers committed to environmental responsibility.</p>
+    </section>
+
+    <section class="why">
+      <h3>Why Choose Us?</h3>
+      <ul style="margin:10px 0 0 18px;color:var(--muted)">
+        <li>15+ years in paper trading industry</li>
+        <li>Global supplier network</li>
+        <li>Competitive pricing & quality assurance</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="contact">
+      <h3>Get In Touch</h3>
+      <p style="color:var(--muted)">Fill out the form below and we'll get back to you within 24 hours with details.</p>
+
+      <form onsubmit="return handleSubmit(event)">
+        <div class="form-grid">
+          <input class="input" required placeholder="Enter your first name" name="first" />
+          <input class="input" required placeholder="Enter your last name" name="last" />
+        </div>
+        <div style="margin-top:12px">
+          <input class="input" required placeholder="Your email" name="email" type="email" />
+        </div>
+        <div style="margin-top:12px">
+          <input class="input" placeholder="Your company name" name="company" />
+        </div>
+        <div style="margin-top:12px">
+          <textarea name="message" class="input" placeholder="Tell us about your paper requirements, quantities, and timeline..." required></textarea>
+        </div>
+        <label class="consent"><input type="checkbox" required /> <span>I agree to be contacted by Excellent Paper Impex regarding my inquiry and understand that my information will be handled according to privacy standards.</span></label>
+
+        <div style="text-align:center;margin-top:10px">
+          <button class="btn" type="submit">Send Message</button>
+        </div>
+      </form>
+</section>
+
+    <footer class="footer">
+      <div style="display:flex;gap:40px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <h4 style="margin:0 0 8px 0">Global Paper Trading</h4>
+          <p style="margin:0;color:#9aa4b2;max-width:340px">Bridging quality paper suppliers with global businesses through reliability, transparency, and customer-first approach.</p>
+        </div>
+        <div style="flex:1;min-width:200px">
+          <h4 style="margin:0 0 10px 0">Quick Links</h4>
+          <a href="#about">About Us</a><br />
+          <a href="#products">Products</a><br />
+          <a href="#contact">Contact</a>
+        </div>
+        <div style="flex:1;min-width:200px">
+          <h4 style="margin:0 0 10px 0">Products</h4>
+          <div style="color:#9aa4b2">
+            Writing & Printing Papers<br />Packaging Papers<br />Specialty Papers<br />Recovered Paper<br />Stock Lot<br />Plastic Rolls<br />News Print<br />Labels<br />Graphic Paper
+          </div>
+        </div>
+        <div style="width:100%;margin-top:18px;color:#9aa4b2;font-weight:600">Presence: USA &amp; India</div>
+      </div>
+    </footer>
+
+  </div>
+
+<script>
+  function handleSubmit(e){
+    e.preventDefault();
+    const form = e.target;
+    // Sends form data to Google Sheets via Apps Script Web App
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2Q8NGy4pLPeuOYzYEx_u4_wvSdPPxjM9zDOvtubZ36Tz9nGyvyInSMdxrFKdXCJmltg/exec";
+
+    const payload = {
+      first: (form.first.value || '').trim(),
+      last: (form.last.value || '').trim(),
+      email: (form.email.value || '').trim(),
+      company: (form.company.value || '').trim(),
+      message: (form.message.value || '').trim(),
+    };
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const prevText = submitBtn ? submitBtn.textContent : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+    }
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.success) {
+          alert('Thank you! Your message has been sent.');
+          form.reset();
+        } else {
+          alert('Something went wrong. Please try again.');
+          console.log('Apps Script response:', data);
+        }
+      })
+      .catch((err) => {
+        alert('Network error. Please try again.');
+        console.error(err);
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = prevText || 'Send Message';
+        }
+      });
+
+    return false;
+  }
+</script>
+  <a href="#top" class="to-top" aria-label="Back to top">↑</a>
+
+<script>
+  // Back-to-top visibility
+  const toTop = document.querySelector('.to-top');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 600) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  });
+</script>
+</body>
+</html>
